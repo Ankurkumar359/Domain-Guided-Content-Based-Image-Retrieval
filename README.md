@@ -1,123 +1,214 @@
-`Required Folder structure`:
+# Domain-Guided Content-Based Image Retrieval
 
-|-Dataset/
-|       |-Art
-|       |-Clipart
-|       |-Product
-|       |-Real World
-|-requirements.txt
-|-config.py
-|-dataset.py
-|-inference.py
-|-losses.py
-|-metrics.py
-|-model.py
-|-run_pipeline.bat
-|-test.py
-|-train.py
-|-utils.py
-|-val.py
-|-EDA.py
-|-create_csv.py
-|-plot_config_scores.py
+## 📁 Required Folder Structure
 
+```bash
+Dataset/
+├── Art/
+├── Clipart/
+├── Product/
+├── Real World/
 
-`requirements`:
- torch
- numpy
- pandas
- matplotlib
- torchvision
- tqdm
- transformers
- scikit-learn
- Pillow
+requirements.txt
+config.py
+dataset.py
+inference.py
+losses.py
+metrics.py
+model.py
+run_pipeline.bat
+test.py
+train.py
+utils.py
+val.py
+EDA.py
+create_csv.py
+plot_config_scores.py
+```
 
+---
 
- ` How to run` :
- run `.\run_pipeline.bat` from the project root in a terminal. It will create the virtual environment, install dependencies, run EDA, train all configurations, evaluate the best model on test, build rankings, and generate retrieval samples, everything will we stored under created folder "outputs".
+## 📦 Requirements
 
- `Main output folders`:
+Install the following dependencies:
 
-`outputs/checkpoints/`
-- best checkpoint for each configuration
+* torch
+* numpy
+* pandas
+* matplotlib
+* torchvision
+* tqdm
+* transformers
+* scikit-learn
+* Pillow
 
-`outputs/logs/`
-- training history csv
-- per-config loss plot
+---
 
-`outputs/reports/`
-- validation reports
-- test reports
-- best model summary
-- validation ranking csv and validation bar plot
-- test ranking csv for the single best model
+## 🚀 How to Run
 
+Run the following command from the project root:
 
-`outputs/embeddings/`
-- saved train, val, and test embeddings
+```bash
+.\run_pipeline.bat
+```
 
-`outputs/samples/`
-- qualitative retrieval examples
+This will automatically:
 
-`outputs/eda/`
-- contains all the saved plot of dataset analysis after splitting
+* Create a virtual environment
+* Install dependencies
+* Perform EDA
+* Train all configurations
+* Evaluate the best model on test data
+* Build rankings
+* Generate retrieval samples
 
-`Architecture figure`
+All outputs will be stored in the **`outputs/`** folder.
 
-Paper-style model and image-flow diagram:
+---
 
+## 📂 Main Output Folders
 
-Files and Their Roles:
-`plot_config_scores.py`
--plots val bar graphs of all 27 configurations
+### `outputs/checkpoints/`
 
-`create_csv.py`
-- builds `dataset_index.csv` by scanning the dataset folders and assigning train/val/test splits per class-domain folder
+* Best checkpoint for each configuration
 
-`EDA.py`
-- performs exploratory data analysis 
+### `outputs/logs/`
 
-`config.py`
-- stores hyperparameters, paths, model options, augmentation settings, and output locations
+* Training history CSV
+* Per-configuration loss plots
 
-`dataset.py`
-- loads split-wise data
-- creates training triplets
-- creates evaluation datasets
+### `outputs/reports/`
 
-`model.py`
-- builds pretrained backbones
-- adds the trainable head
-- adds embedding projection
-- adds class classifier
-- adds GRL and domain classifier
+* Validation reports
+* Test reports
+* Best model summary
+* Validation ranking CSV + bar plot
+* Test ranking CSV for best model
 
-`losses.py`
-- defines class cross-entropy loss
-- defines domain cross-entropy loss
+### `outputs/embeddings/`
 
-`train.py`
-- trains each experiment configuration
-- saves history and best checkpoints
-- selects the best model using the score
+* Saved train, validation, and test embeddings
 
-`val.py`
-- runs retrieval evaluation for a split
-- saves metrics, retrieval outputs, t-SNE, and embeddings
+### `outputs/samples/`
 
-`test.py`
-- builds test ranking csv across checkpoints
-- evaluates the best validation model on the test split
-- saves test metrics and summary csv files
+* Qualitative retrieval examples
 
-`metrics.py`
-- generates embeddings
-- computes cosine similarity
-- computes retrieval metrics
+### `outputs/eda/`
 
-`utils.py`
-- helper utilities for transforms, checkpoints, history plots, and score calculation
+* Dataset analysis plots after splitting
 
-`inference.py`
-- saves qualitative retrieval example images
+---
+
+## 🧠 Architecture
+
+Paper-style model and image-flow diagram.
+
+---
+
+## 📄 Files and Their Roles
+
+### `plot_config_scores.py`
+
+* Plots validation bar graphs for all 27 configurations
+
+### `create_csv.py`
+
+* Builds `dataset_index.csv` by scanning dataset folders
+* Assigns train/val/test splits per class-domain
+
+### `EDA.py`
+
+* Performs exploratory data analysis
+
+### `config.py`
+
+* Stores hyperparameters, paths, model configs, augmentations, output paths
+
+### `dataset.py`
+
+* Loads dataset splits
+* Creates training triplets
+* Prepares evaluation datasets
+
+### `model.py`
+
+* Loads pretrained backbones
+* Adds:
+
+  * Trainable head
+  * Embedding projection
+  * Class classifier
+  * Gradient Reversal Layer (GRL)
+  * Domain classifier
+
+### `losses.py`
+
+* Class cross-entropy loss
+* Domain cross-entropy loss
+
+### `train.py`
+
+* Trains all configurations
+* Saves history and best checkpoints
+* Selects best model
+
+### `val.py`
+
+* Runs retrieval evaluation
+* Saves:
+
+  * Metrics
+  * Retrieval outputs
+  * t-SNE plots
+  * Embeddings
+
+### `test.py`
+
+* Builds ranking CSV across checkpoints
+* Evaluates best validation model on test set
+* Saves final metrics and summaries
+
+### `metrics.py`
+
+* Generates embeddings
+* Computes cosine similarity
+* Computes retrieval metrics
+
+### `utils.py`
+
+* Helper utilities for:
+
+  * Transforms
+  * Checkpoints
+  * History plots
+  * Score calculation
+
+### `inference.py`
+
+* Generates qualitative retrieval examples
+
+---
+
+## 📊 Outputs Summary
+
+All experiment artifacts are organized inside:
+
+```bash
+outputs/
+├── checkpoints/
+├── logs/
+├── reports/
+├── embeddings/
+├── samples/
+├── eda/
+```
+
+---
+
+## ✨ Notes
+
+* Ensure dataset follows the exact folder structure
+* Run pipeline from root directory
+* Outputs are automatically managed per configuration
+
+---
